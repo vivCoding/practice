@@ -10,14 +10,11 @@ int main() {
 	int n, m, k;
 	cin >> n >> m >> k;
 	int tenants[n], apartments[m];
-	int temp;
 	for (int i = 0; i < n; i++) {
-		cin >> temp;
-		tenants[i] = temp;
+		cin >> tenants[i];
 	}
 	for (int i = 0; i < m; i++) {
-		cin >> temp;
-		apartments[i] = temp;
+		cin >> apartments[i];
 	}
 
 	sort(tenants, tenants + n);
