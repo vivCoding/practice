@@ -1,12 +1,13 @@
 #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
+#define int long
 
 /*
  * Problem: 
 */
 
-int main() {
+signed main() {
     
     return 0;
 }
