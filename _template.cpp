@@ -7,6 +7,6 @@ using namespace std;
 */
 
 signed main() {
-    cin.tie(0); ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false); cin.tie(nullptr); 
     return 0;
 }
