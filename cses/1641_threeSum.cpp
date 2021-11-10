@@ -13,11 +13,10 @@ signed main() {
     int numbers[n];
     for (int i = 0; i < n; i++) {
         cin >> numbers[i];
-        int diff = x - numbers[i];
         for (int j = 0; j < i; j++) {
-            int diff2 = diff - numbers[j]; 
-            if (m.find(diff2) != m.end() && m.find(diff2)->second != j) {
-                cout << i + 1 << " " << j + 1 << " " << m.find(diff2)->second + 1 << endl;
+            int diff = x - numbers[i] - numbers[j];
+            if (m.find(diff) != m.end() && m.find(diff)->second != j) {
+                cout << i + 1 << " " << j + 1 << " " << m.find(diff)->second + 1 << endl;
                 return 0;
             }
         }
