@@ -4,6 +4,7 @@ using namespace std;
 
 /*
  * Problem: https://purdue.kattis.com/sessions/zfo7ia/problems/joinstrings
+ * UNSOLVED, runtime error after first few test cases
 */
 
 void print(int start, vector<vector<int>> m, string* s) {
