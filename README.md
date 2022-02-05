@@ -1,6 +1,4 @@
 # programming practice
-cp stuff and practice problems
+competitive programming and coding practice
 
-Get on that grind >:)
-
-<img alt="*insert cat furiously typing gif here*" src="https://i.pinimg.com/originals/d9/32/f9/d932f98b1a9cf1873addb1ef55956434.gif" width=300 height=300/>
+<img alt="*insert cat furiously typing gif here*" src="https://media.discordapp.net/attachments/842467285302247464/936143216774885396/cat_typing_fast.gif" width=300 height=300/>
