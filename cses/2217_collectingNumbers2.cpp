@@ -1,101 +1,110 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long
+typedef long long ll;
+typedef long double ld;
+typedef pair<ll, ll> pll;
+typedef pair<ld, ld> pld;
+typedef vector<ll> vll;
+const ll MOD9 = 1e9 + 7;
 
 /*
  * Problem: https://cses.fi/problemset/task/2217
- * UNSOLVED
 */
 
 signed main() {
-    int n, m; cin >> n >> m;
-    int nums[n];    
-    int looking[n] = {0};
-    int nextStuff[n];
-    int prevStuff[n];
-    fill(nextStuff, nextStuff + n, -1);
-    fill(prevStuff, prevStuff + n, -1);
-    int temp;
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    ll n, m; cin >> n >> m;
+    ll nums[n];
+    ll looking[n];
+    ll pos[n];
+    ll temp, temp2;
     for (int i = 0; i < n; i++) {
         cin >> temp;
         temp--;
         nums[i] = temp;
         looking[temp] = 0;
+        pos[temp] = i;
         if (temp + 1 < n) {
             looking[temp + 1] = 1;
-            prevStuff[temp + 1] = i;
-        }
-        if (temp != 0) {
-            nextStuff[temp - 1] = i;
         }
     }
-    int count = 1;
-    for (int l : looking) {
-        count += l;
+    ll rounds = 1;
+    for (ll l : looking) {
+        rounds += l;
     }
-    int t, t2;
-    int x, x2;
-    for (int i = 0; i < m; i++) {
-        cin >> t >> t2;
-        t--; t2--;
-        x = nums[t], x2 = nums[t2];
-        if (x != 0) {
-            nextStuff[x - 1] = t2;
-        }
-        if (x2 != 0) {
-            nextStuff[x2 - 1] = t;
-        }
-        if (x + 1 < n) {
-            prevStuff[x + 1] = t2;
-        }
-        if (x2 + 1 < n) {
-            prevStuff[x2 + 1] = t;
-        }
+    vector<pll> ops;
+    for (int i =0; i < m; i++) {
+        cin >> temp >> temp2;
+        ops.push_back({ temp, temp2 });
+    }
+    for (pll op : ops) {
+        ll a = op.first - 1;
+        ll b = op.second - 1;
+        ll n1 = nums[a];
+        ll n2 = nums[b];
 
-        for (int next : nextStuff) {
-            cout << next << ", ";
-        }
-        cout << endl;
-        for (int prev : prevStuff) {
-            cout << prev << ", ";
-        }
-        cout << endl << "------" << endl;
-        
-        swap(nums[t], nums[t2]);
+        bool ga = n1 == n - 1 ? true : pos[n1] < pos[n1 + 1];
+        bool gb = n2 == n - 1 ? true : pos[n2] < pos[n2 + 1];
+        bool gap = n1 == 0 ? true : pos[n1 - 1] < pos[n1];
+        bool gbp = n2 == 0 ? true : pos[n2 - 1] < pos[n2];
 
-        if (t2 <= nextStuff[x] && t >= nextStuff[x]) {
-            count--;
-            cout << 'a' << endl;
-        } else if (t2 >= nextStuff[x] && t <= nextStuff[x]) {
-            cout << 'b' << endl;
-            count++;
-        }
-        
-        if (t <= nextStuff[x2] && t2 >= nextStuff[x]) {
-            cout << 'c' << endl;
-            count--;
-        } else if (t >= nextStuff[x2] && t2 <= nextStuff[x2]) {
-            cout << 'd' << endl;
-            count++;
-        }
-        
-        if (t2 >= prevStuff[x] && t <= prevStuff[x]) {
-            cout << 'e' << " " << x << ", " << x2  << ", " << nums[prevStuff[x]] << endl;
-            count--;
-        } else if (t2 <= prevStuff[x] && t >= prevStuff[x]) {
-            cout << 'f' << endl;
-            count++;
-        }
+        swap(pos[n1], pos[n2]);
+        swap(nums[a], nums[b]);
 
-        if (t >= prevStuff[x2] && t2 <= prevStuff[x2]) {
-            cout << 'g' << endl;
-            count--;
-        } else if (t <= prevStuff[x2] && t2 >= prevStuff[x2]) {
-            cout << 'h' << endl;
-            count++;
-        }
+        bool aga = n1 == n - 1 ? true : pos[n1] < pos[n1 + 1];
+        bool agb = n2 == n - 1 ? true : pos[n2] < pos[n2 + 1];
+        bool agap = n1 == 0 ? true : pos[n1 - 1] < pos[n1];
+        bool agbp = n2 == 0 ? true : pos[n2 - 1] < pos[n2];
 
-        cout << "count: " << count << endl;
+        if (abs(n1 - n2) == 1) {
+            if ((!ga && aga) || (!gb && agb)) {
+                rounds--;
+            }
+            if ((ga && !aga) || (gb && !agb)) {
+                rounds++;
+            }
+            if (n1 > n2) {
+                if (!gbp && agbp) {
+                    rounds--;
+                }
+                if (gbp && !agbp) {
+                    rounds++;
+                }
+            } else {
+                if (!gap && agap) {
+                    rounds--;
+                }
+                if (gap && !agap) {
+                    rounds++;
+                }
+            }
+        } else {
+            if (!ga && aga) {
+                rounds--;
+            }
+            if (ga && !aga) {
+                rounds++;
+            }
+            if (!gap && agap) {
+                rounds--;
+            }
+            if (gap && !agap) {
+                rounds++;
+            }
+            if (!gb && agb) {
+                rounds--;
+            }
+            if (gb && !agb) {
+                rounds++;
+            }
+            if (!gbp && agbp) {
+                rounds--;
+            }
+            if (gbp && !agbp) {
+                rounds++;
+            }
+        }
+        cout << rounds << endl;
     }
     return 0;
 }
