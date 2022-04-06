@@ -10,11 +10,12 @@ const int MOD9 = 1000000007;
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        if (!binary_search(nums.begin(), nums.end(), target)) {
-            return { -1, -1 };
+        auto p = upper_bound(nums.begin(), nums.end(), target);
+        if (p == nums.begin() || (p != nums.begin() && *(p - 1) != target)) {
+            return { -1 , -1 };
         }
+        int pr = p - nums.begin();
         int pl = lower_bound(nums.begin(), nums.end(), target) - nums.begin();
-        int pr = upper_bound(nums.begin(), nums.end(), target) - nums.begin();
         pr = pl == pr ? pr : pr - 1;
         return { pl, pr };
     }

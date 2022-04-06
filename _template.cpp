@@ -1,7 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
-const int MOD9 = 1000000007;
+typedef long long ll;
+typedef long double ld;
+typedef pair<ll, ll> pll;
+typedef pair<ld, ld> pld;
+typedef vector<ll> vll;
+const ll MOD9 = 1e9 + 7;
 
 /*
  * Problem: 

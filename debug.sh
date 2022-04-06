@@ -9,5 +9,5 @@ filename="${filename%.*}"
 mkdir -p $OUTDIR
 echo "Compiling..."
 g++ -g -std=c++11 -o $OUTDIR/$filename $1
-echo "Compilation finished. Running..."
-exec $OUTDIR/$filename
+echo "Compilation finished. Debugging..."
+gdb $OUTDIR/$filename
