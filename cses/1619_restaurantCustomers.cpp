@@ -9,25 +9,25 @@ const ll MOD9 = 1e9 + 7;
 
 /*
  * Problem: https://cses.fi/problemset/task/1619
- * UNSOLVED
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     ll n; cin >> n;
+    vector<pll> pts;
     ll a, b;
-    vector<pll> times;
     for (int i = 0; i < n; i++) {
         cin >> a >> b;
-        times.push_back({ b, a });
+        pts.push_back({ a, 1 });
+        pts.push_back({ b, -1 });
     }
-    sort(times.begin(), times.end());
-    ll ct = 1;
+    sort(pts.begin(), pts.end());
+    ll ct = 0;
     ll maxCt = -1;
-    ll lastIdx = 0;
-    for (int i = 1; i < n; i++) {
-        
+    for (pll pt : pts) {
+        ct += pt.second;
+        maxCt = max(ct, maxCt);
     }
-    cout << (maxCt == -1 ? ct : maxCt) << endl;
+    cout << maxCt << endl;
     return 0;
 }
