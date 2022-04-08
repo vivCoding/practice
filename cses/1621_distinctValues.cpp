@@ -6,23 +6,14 @@ using namespace std;
 */
 
 int main() {
-	int n;
-	cin >> n;
-	int x[n];
+	int n; cin >> n;
+	unordered_set<int> st;
+	st.reserve(n);
+	int temp;
 	for (int i = 0; i < n; i++) {
-		cin >> x[i];
+		cin >> temp;
+		st.insert(temp);
 	}
-
-	sort(x, x + n);
-
-	int count = 1;
-
-	for (int i = 0; i < n - 1; i++) {
-		if (x[i] != x[i + 1]) {
-			count++;
-		}
-	}
-
-	cout << count << endl;
+	cout << st.size() << endl;
 	return 0;
 }

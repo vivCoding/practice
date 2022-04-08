@@ -8,26 +8,26 @@ typedef vector<ll> vll;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/2183
- * understand?
+ * Problem: https://cses.fi/problemset/task/1636
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    ll n; cin >> n;
+    ll n, x; cin >> n >> x;
     ll nums[n];
     for (int i = 0; i < n; i++) {
         cin >> nums[i];
     }
-    sort(nums, nums + n);
-    ll ps = 1;
-    for (int i = 0; i < n; i++) {
-        if (nums[i] > ps) {
-            cout << ps << endl;
-            return 0;
+    vll dp(x + 1);
+    dp[0] = 1;
+    for (ll num : nums) {
+        for (int i = 1; i <= x; i++) {
+            if (i - num >= 0) {
+                dp[i] += dp[i - num];
+                dp[i] = dp[i] % MOD9;
+            }
         }
-        ps += nums[i];
     }
-    cout << ps << endl;
+    cout << dp[x] % MOD9 << endl;
     return 0;
 }
