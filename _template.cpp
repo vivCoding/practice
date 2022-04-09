@@ -5,6 +5,7 @@ typedef long double ld;
 typedef pair<ll, ll> pll;
 typedef pair<ld, ld> pld;
 typedef vector<ll> vll;
+const ll LLMAX = INT64_MAX / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*

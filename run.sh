@@ -8,6 +8,6 @@ filename="${filename%.*}"
 
 mkdir -p $OUTDIR
 echo "Compiling..."
-g++ -g -std=c++11 -o $OUTDIR/$filename $1
+g++ -g -std=c++17 -o $OUTDIR/$filename $1
 echo "Compilation finished. Running..."
 exec $OUTDIR/$filename
