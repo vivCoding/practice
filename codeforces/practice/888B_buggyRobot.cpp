@@ -24,10 +24,31 @@ const ll LLMAX = LONG_LONG_MAX / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/problemset/problem/888/B
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    int n; string s;
+    see(n, s);
+    int x = 0, y = 0;
+    for (char c : s) {
+        switch (c) {
+            case 'L':
+                x--;
+                break;
+            case 'R':
+                x++;
+                break;
+            case 'D':
+                y--;
+                break;
+            case 'U':
+                y++;
+                break;
+        }
+    }
+    // offset is the extra moves
+    putl(n - abs(x) - abs(y));
     return 0;
 }

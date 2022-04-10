@@ -24,10 +24,22 @@ const ll LLMAX = LONG_LONG_MAX / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/problemset/problem/844/A
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    us<char> st;
+    string s;
+    int k;
+    see(s, k);
+    if (k > s.length()) {
+        putl("impossible");
+        return 0;
+    }
+    for (char c : s) {
+        st.insert(c);
+    }
+    putl(max(k - (int) st.size(), 0));
     return 0;
 }
