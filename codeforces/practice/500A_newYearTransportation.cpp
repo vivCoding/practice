@@ -24,10 +24,31 @@ const ll LLMAX = LONG_LONG_MAX / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/problemset/problem/500/A
 */
+
+ll n, t;
+vll g;
+
+void dfs(ll next) {
+    if (next + 1 == t) {
+        putl("YES");
+        exit(0);
+    }
+    if (next + 1 > t) {
+        putl("NO");
+        exit(0);
+    }
+    dfs(next + g[next]);
+}
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    see(n, t);
+    g.reserve(n);
+    rep(i, 0, n - 1, 1) {
+        see(g[i]);
+    }
+    dfs(0);
     return 0;
 }
