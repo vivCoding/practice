@@ -20,14 +20,30 @@ typedef unordered_map<ll, ll> umll;
 #define rep(i, a, b, v) for (int i = a; i < b; i += v)
 #define all(x) x.begin(), x.end()
 #define setpr(x) cout << setprecision(x) << fixed
-const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
+const ll LLMAX = LONG_LONG_MAX / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/problemset/problem/1660/C
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    ll t; see(t);
+    while (t--) {
+        string s; see(s);
+        um<char, bool> mp;
+        ll ct = 0;
+        for (char c : s) {
+            if (!mp[c]) {
+                mp[c] = true;
+            } else {
+                // we have a pair
+                ct += 2;
+                mp.clear();
+            }
+        }
+        putl((ll) s.length() - ct);
+    }
     return 0;
 }
