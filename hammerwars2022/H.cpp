@@ -24,9 +24,8 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/group/5HZlfh4ol7/contest/378015/problem/H
 */
-
 
 class UF {
 public:
@@ -88,27 +87,28 @@ public:
 };
 
 vc<vll> g;
-unordered_set<ll> visited;
-ll vertices, edges;
+bool good = true;
 
-void dfs(ll ni, ll parent) {
-    visited.insert(ni);
-    vertices++;
+void dfs(ll ni, ll parent, unordered_set<ll>* visited) {
+    visited->insert(ni);
+    if (g[ni].size() != 2) {
+        good = false;
+        return;
+    }
     for (ll child : g[ni]) {
         if (child != parent) {
-            edges++;
-            if (visited.find(child) == visited.end()) {
-                dfs(child, ni);
+            if (visited->find(child) == visited->end()) {
+                dfs(child, ni, visited);
             }
         }
+        if (!good) return;
     }
 }
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     ll n, m; see(n, m);
-    g.reserve(n);
-    visited.reserve(n);
+    g.resize(n);
     UF uf(n);
     ll temp, temp2;
     rep(i, 0, m, 1) {
@@ -119,11 +119,10 @@ int main() {
     }
     ll ct = 0;
     for (auto p : uf.components) {
-        visited.clear();
-        vertices = 0, edges = 0;
-        dfs(p, p);
-        putl(p, edges, vertices);
-        if (edges >= vertices) {
+        unordered_set<ll> st;
+        good = true;
+        dfs(p, p, &st);
+        if (good) {
             ct++;
         }
     }

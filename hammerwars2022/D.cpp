@@ -24,21 +24,21 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/group/5HZlfh4ol7/contest/378015/problem/D
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     ll n; see(n);
-    unordered_set<ll> st;
-    st.reserve(n);
-    ll temp;
-    rep(i, 0, n, 1) {
-        see(temp);
-        if (temp != 0) {
-            st.insert(temp);
+    string s; see(s);
+    rep(i, 0, n - 1, 1) {
+        if (s[i] != s[i + 1]) {
+            putl("YES");
+            put(s[i], s[i + 1]);
+            putl();
+            return 0;
         }
     }
-    putl(st.size());
+    putl("NO");
     return 0;
 }

@@ -24,20 +24,28 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/group/5HZlfh4ol7/contest/378015/problem/C
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    ll a, b, c; see(a, b, c);
-    if (c == 0 && a == b) {
-        putl("YES");
-    } else if (c == 0 && a != b) {
-        putl("NO");
-    } else {
-        ll diff = (b - a);
-        bool good = (diff % c == 0) && (diff / c >= 0);
-        putl(good ? "YES" : "NO");
+    ll t; see(t);
+    while (t--) {
+        string s; see(s);
+        ll c0 = 0, c1 = 0;
+        for (char c : s) {
+            if (c == '0') {
+                c0++;
+            } else {
+                c1++;
+            }
+        }
+        ll turns = 0;
+        while (c0 != 0 && c1 != 0) {
+            c0--, c1--;
+            turns++;
+        }
+        putl(turns % 2 == 0 ? "NET" : "DA");
     }
     return 0;
 }

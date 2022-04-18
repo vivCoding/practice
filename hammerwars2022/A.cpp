@@ -24,10 +24,22 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: 
+ * Problem: https://codeforces.com/group/5HZlfh4ol7/contest/378015/problem/A
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    ll t; see(t);
+    while (t--) {
+        ll n; see(n);
+        ll nums[n];
+        rep(i, 0, n, 1) {
+            see(nums[i]);
+        }
+        sort(nums, nums + n);
+        ll m = nums[n - 1];
+        ll m2 = nums[0];
+        putl(m - m2);
+    }
     return 0;
 }
