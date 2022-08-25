@@ -24,11 +24,18 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1092
+ * Problem: https://cses.fi/problemset/task/1072
+ * pretty mathy, explanation: https://japlslounge.com/posts/cses/two_knights/1.htm
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    
+    ll n; see(n);
+    putl(0);
+    rep(i, 2, n + 1, 1) {
+        ll totalWays = pow(i, 2) * (pow(i, 2) - 1) / 2;
+        ll attackSpaces = 4 * (i - 2) * (i - 1);
+        putl(totalWays - attackSpaces);
+    }
     return 0;
 }

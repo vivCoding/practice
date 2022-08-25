@@ -24,11 +24,17 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1092
+ * Problem: https://cses.fi/problemset/task/1068
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    
+    ll n; see(n);
+    puts(n);
+    while (n != 1) {
+        if (n % 2 == 0) n /= 2;
+        else n = n * 3 + 1;
+        puts(n);
+    }
     return 0;
 }
