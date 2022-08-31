@@ -25,9 +25,19 @@ const ll MOD9 = 1e9 + 7;
 
 /*
  * Problem: https://cses.fi/problemset/task/1754
+ * UNSOLVED
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    ll t; see(t);
+    rep(_, 0, t, 1) {
+        ll a, b; see(a, b);
+        if ((a + b) % 3 == 0 && abs(a - b) <= max(a, b) / 2) {
+            putl("YES", a, b);
+        } else {
+            putl("NO");
+        }
+    }
     return 0;
 }
