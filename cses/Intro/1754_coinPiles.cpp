@@ -24,40 +24,10 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1092
+ * Problem: https://cses.fi/problemset/task/1754
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    ll n; see(n);
-    ll total = n * (n + 1) / 2;
-    if (total % 2 != 0) {
-        putl("NO");
-        return 0;
-    }
-    putl("YES");
-    ll target = total / 2, curr = 0, i = 1, j = n;
-    while (curr < target) {
-        if (curr + j <= target) {
-            curr += j;
-            j--;
-        }
-        if (curr + i <= target) {
-            curr += i; 
-            i++;
-        }
-    }
-    putl(i + (n - j) - 1);
-    rep(x, 1, i, 1) {
-        puts(x);
-    }
-    rep(x, j + 1, n + 1, 1) {
-        puts(x);
-    }
-    putl();
-    putl(j - i + 1);
-    rep(x, i, j + 1, 1) {
-        puts(x);
-    }
     return 0;
 }
