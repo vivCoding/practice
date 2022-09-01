@@ -24,21 +24,48 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1754
+ * Problem: https://cses.fi/problemset/task/1755
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    ll t; see(t);
-    rep(_, 0, t, 1) {
-        ll a, b; see(a, b);
-        if (2 * a - b < 0 || 2 * b - a < 0) {
-            putl("NO");
-        } else if ((a + b) % 3 == 0) {
-            putl("YES");
-        } else {
-            putl("NO");
+    string s; see(s);
+    int n = s.length();
+    um<char, int> mp; mp.reserve(n);
+    for (char c : s) {
+        mp[c]++;
+    }
+    char oddChar = ' ';
+    for (auto x : mp) {
+        if (x.second % 2 == 1) {
+            if (oddChar != ' ' || n % 2 == 0) {
+                putl("NO SOLUTION");
+                return 0;
+            }
+            oddChar = x.first;
         }
+    }
+    char res[n];
+    int i = 0, j = n - 1;
+    for (auto x : mp) {
+        if (x.first == oddChar) continue;
+        rep(_, 0, x.second / 2, 1) {
+            res[i] = x.first;
+            i++;
+        }
+        rep(_, 0, x.second / 2, 1) {
+            res[j] = x.first;
+            j--;
+        }
+    }
+    if (oddChar != ' ') {
+        rep(_, 0, mp[oddChar], 1) {
+            res[i] = oddChar;
+            i++;
+        }
+    }
+    for (char c : res) {
+        put(c);
     }
     return 0;
 }

@@ -24,21 +24,33 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1754
+ * Problem: https://leetcode.com/problems/beautiful-array/
+ * UNSOLVED, need to understand
 */
+
+bool checkSolution(int nums[], int n) {
+    rep(i, 0, n, 1) {
+        rep(j, i + 1, n, 1) {
+            int sum = nums[i] + nums[j];
+            if (sum % 2 == 1) continue;
+            rep(k, i + 1, j, 1) {
+                if (2 * nums[k] == sum) {
+                    putl("BAD", i, j, k, nums[i], nums[j], nums[k]);
+                    return false;
+                }
+            }
+        }
+    }
+    putl("GOOD");
+    return true;
+}
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    ll t; see(t);
-    rep(_, 0, t, 1) {
-        ll a, b; see(a, b);
-        if (2 * a - b < 0 || 2 * b - a < 0) {
-            putl("NO");
-        } else if ((a + b) % 3 == 0) {
-            putl("YES");
-        } else {
-            putl("NO");
-        }
-    }
+    int n; see(n);
+    int nums[n] = {0}; nums[0] = 1;
+    checkSolution(nums, n);
     return 0;
 }
+// 1 5 2 4 3
+// 1 9 5 7 3 6 4 8 2

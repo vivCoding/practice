@@ -24,20 +24,18 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1754
+ * Problem: https://codeforces.com/problemset/problem/1328/A
 */
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    ll t; see(t);
-    rep(_, 0, t, 1) {
-        ll a, b; see(a, b);
-        if (2 * a - b < 0 || 2 * b - a < 0) {
-            putl("NO");
-        } else if ((a + b) % 3 == 0) {
-            putl("YES");
+    int n; see(n);
+    rep(i, 0, n, 1) {
+        int a, b; see(a, b);
+        if (a % b != 0) {
+            putl(b * (a / b + 1) - a);
         } else {
-            putl("NO");
+            putl(0);
         }
     }
     return 0;
