@@ -24,36 +24,31 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1622
+ * Problem: https://cses.fi/problemset/task/2431
 */
 
-us<string> usedWords;
-vc<string> words;
-
-void rec(string curr, string remaining) {
-    if (remaining.length() == 0 && usedWords.find(curr) == usedWords.end()) {
-        usedWords.insert(curr);
-        words.push_back(curr);
-        return;
-    }
-    rep(i, 0, remaining.length(), 1) {
-        rec(curr + remaining[i],
-            remaining.substr(0, i) + (i == remaining.length() - 1 ? "" : remaining.substr(i + 1))
-        );
-    }
-}
+// gaps: 10 180 2700 36000 450000
+// index: 10 190 2890 38890 488890
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    words.reserve(40320); // 8!
-    usedWords.reserve(40320); // 8!
-    string s; see(s);
-    int n = s.length();
-    sort(s.begin(), s.end());
-    rec("", s);
-    putl(words.size());
-    for (string word : words) {
-        putl(word);
+    ll q; see(q);
+    rep(_, 0, q, 1) {
+        ll k; see(k);
+        ll sum = 0, i = 1;
+        ll ct = k;
+        while (true) {
+            ll next = 9 * i * pow(10, i - 1) + (i == 1 ? 1 : 0);
+            if (ct >= next) {
+                ct -= next;
+                sum += next;
+                i++;
+            } else break;
+        }
+        ll numDigits = i;
+        ll curr = numDigits == 1 ? 0 : pow(10, numDigits - 1);
+        string num = to_string(curr + (k - sum) / numDigits);
+        putl(num[(k - sum) % numDigits]);
     }
     return 0;
 }

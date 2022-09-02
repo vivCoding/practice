@@ -24,36 +24,30 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1622
+ * Problem: https://cses.fi/problemset/task/1623
 */
 
-us<string> usedWords;
-vc<string> words;
+vc<ll> nums;
+ll n;
+ll totalSum = 0;
+ll mnDiff = LONG_LONG_MAX;
 
-void rec(string curr, string remaining) {
-    if (remaining.length() == 0 && usedWords.find(curr) == usedWords.end()) {
-        usedWords.insert(curr);
-        words.push_back(curr);
-        return;
-    }
-    rep(i, 0, remaining.length(), 1) {
-        rec(curr + remaining[i],
-            remaining.substr(0, i) + (i == remaining.length() - 1 ? "" : remaining.substr(i + 1))
-        );
+void rec(ll curr, int pi) {
+    mnDiff = min(abs(totalSum - curr - curr), mnDiff);
+    rep(i, pi, n, 1) {
+        rec(curr + nums[i], i + 1);
     }
 }
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    words.reserve(40320); // 8!
-    usedWords.reserve(40320); // 8!
-    string s; see(s);
-    int n = s.length();
-    sort(s.begin(), s.end());
-    rec("", s);
-    putl(words.size());
-    for (string word : words) {
-        putl(word);
+    see(n);
+    nums.reserve(n);
+    rep(i, 0, n, 1) {
+        see(nums[i]);
+        totalSum += nums[i];
     }
+    rec(0, 0);
+    putl(mnDiff);
     return 0;
 }

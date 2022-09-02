@@ -24,36 +24,45 @@ const ll LLMAX = LONG_LONG_MAX / 2, LLMIN = LONG_LONG_MIN / 2;
 const ll MOD9 = 1e9 + 7;
 
 /*
- * Problem: https://cses.fi/problemset/task/1622
+ * Problem: https://cses.fi/problemset/task/1624
 */
 
-us<string> usedWords;
-vc<string> words;
+char board[8][8];
+ll ct = 0;
+vc<pll> queens;
 
-void rec(string curr, string remaining) {
-    if (remaining.length() == 0 && usedWords.find(curr) == usedWords.end()) {
-        usedWords.insert(curr);
-        words.push_back(curr);
+void rec(int x) {
+    if (queens.size() == 8) {
+        ct++;
         return;
     }
-    rep(i, 0, remaining.length(), 1) {
-        rec(curr + remaining[i],
-            remaining.substr(0, i) + (i == remaining.length() - 1 ? "" : remaining.substr(i + 1))
-        );
+    rep(y, 0, 8, 1) {
+        if (board[x][y] == '.') {
+            bool bad = false;
+            for (pll queen : queens) {
+                if (y == queen.second || abs(queen.first - x) == abs(queen.second - y)) {
+                    bad = true; 
+                    break;
+                }
+            }
+            if (!bad) {
+                queens.push_back({x, y});
+                rec(x + 1);
+                queens.pop_back();
+            }
+        }
     }
 }
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    words.reserve(40320); // 8!
-    usedWords.reserve(40320); // 8!
-    string s; see(s);
-    int n = s.length();
-    sort(s.begin(), s.end());
-    rec("", s);
-    putl(words.size());
-    for (string word : words) {
-        putl(word);
+    queens.reserve(8);
+    rep(x, 0, 8, 1) {
+        rep(y, 0, 8, 1) {
+            see(board[x][y]);
+        }
     }
+    rec(0);
+    putl(ct);
     return 0;
 }
