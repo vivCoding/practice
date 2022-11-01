@@ -3,7 +3,6 @@ using namespace std;
 
 /*
  * Problem: https://leetcode.com/problems/trapping-rain-water/
- UNSOVLED
 */
 
 int trap(vector<int>& height) {
@@ -33,5 +32,7 @@ int trap(vector<int>& height) {
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    cout << LONG_MAX << endl;
+    cout << LONG_LONG_MAX << endl;
     return 0;
 }
