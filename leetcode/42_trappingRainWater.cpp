@@ -7,24 +7,32 @@ using namespace std;
 
 int trap(vector<int>& height) {
     int n = height.size();
-    if (n < 3) return 0;
-    int mxl[n], mxr[n];
-    for (int i = 0; i < n; i++) {
-        if (i < 3) mxl[i] = 0, mxr[n - i - 1] = 0;
-        else {
-            mxl[i] = max(mxl[i - 2], mxl[i - 1]);
-            mxr[i] = max(mxr[n - i - 1], mxr[i - 1]);
+    stack<pair<int, int>> s1, s2;
+    for (int i = n - 1; i >= 0; i--) {
+        while (!s1.empty() && s1.top().first < height[i]) {
+            s1.pop();
+        }
+        s1.push({height[i], i});
+        if (s2.empty() || height[i] > s2.top().first) {
+            s2.push({height[i], i});
         }
     }
-
-
-    int lastMax = 0;
-    int ct = 0, lastFilled = 0;
-    for (int x : height) {
-        if (x < lastMax) {
-            lastFilled += lastMax - x;
-        } else {
-            ct += lastFilled;
+    int ct = 0;
+    while (s1.size() > 1) {
+        auto a = s1.top();
+        s1.pop();
+        auto b = s1.top();
+        for (int i = a.second + 1; i < b.second; i++) {
+            ct += a.first - height[i];
+        }
+    }
+    while (s2.size() > 1) {
+        auto a = s2.top();
+        s2.pop();
+        if (a.second < s1.top().second) continue;
+        auto b = s2.top();
+        for (int i = a.second + 1; i < b.second; i++) {
+            ct += b.first - height[i];
         }
     }
     return ct;
