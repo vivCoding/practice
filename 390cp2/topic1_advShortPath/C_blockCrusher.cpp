@@ -57,7 +57,7 @@ int main() {
                     }
                 }
             }
-            rep(k, 0, i + 1, 1) {
+            rrep(k, i, 0, 1) {
                 rep(j, 0, w, 1) {
                     int val = charToDigit(mp[k][j]);
                     for (auto p : dirs) {
