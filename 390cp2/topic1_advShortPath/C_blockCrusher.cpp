@@ -37,13 +37,16 @@ int main() {
         int dp[h][w] = {};
         rep(i, 0, h, 1) {
             see(mp[i]);
+            // initialize dp table
             rep(j, 0, w, 1) {
                 dp[i][j] = 12000;
             }
         }
         int dirs[][2] = {{0, -1}, {0, 1}, {1, 0}, {-1, 0}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
+        // used for the very last row
         int lastIdx = 0, lastMin = INT_MAX;
         rep(i, 0, h, 1) {
+            // update dp table for the current row
             rep(j, 0, w, 1) {
                 int val = charToDigit(mp[i][j]);
                 if (i == 0) {
@@ -57,6 +60,7 @@ int main() {
                     }
                 }
             }
+            // for all rows before, update the dp table (need to account for fracture going up and down)
             rrep(k, i, 0, 1) {
                 rep(j, 0, w, 1) {
                     int val = charToDigit(mp[k][j]);
@@ -66,6 +70,7 @@ int main() {
                             dp[k][j] = min(dp[ny][nx] + val, dp[k][j]);
                         }
                     }
+                    // if on last row, get the idx of the lowest fracture score
                     if (i == h - 1) {
                         if (dp[i][j] < lastMin) lastIdx = j;
                         lastMin = min(dp[i][j], lastMin);
@@ -73,11 +78,13 @@ int main() {
                 }
             }
         }
+        // backtrack and update block
         int cy = h - 1, cx = lastIdx;
         mp[cy][cx] = ' ';
         while (cy != 0) {
             dp[cy][cx] = INT_MAX;
             int lx, ly, lastMin = INT_MAX;
+            // the last minimum value in the dp table (starting from last known position) would be where fracture occurs
             for (auto p : dirs) {
                 int ny = cy + p[0], nx = cx + p[1];
                 if (nx >= 0 && nx < w && ny >= 0 && ny < h) {
@@ -88,6 +95,7 @@ int main() {
             mp[ly][lx] = ' ';
             cx = lx, cy = ly;
         }
+        // output
         for (auto s : mp) {
             putl(s);
         }
