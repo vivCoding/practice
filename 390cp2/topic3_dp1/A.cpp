@@ -33,6 +33,7 @@ int charToDigit(char c) { return c - 48; }
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int n, m; see(n, m);
+    // map<note, set of instruments that play note>
     um<int, us<int>> mp;
     int k, t;
     rep(i, 0, n, 1) {
@@ -46,27 +47,29 @@ int main() {
     rep(i, 0, m, 1) see(notes[i]);
 
     int ct = 0;
+    // current set of instruments
     us<int> st = mp[notes[0]];
     rep(i, 1, m, 1) {
-        us<int> newSt = st;
+        us<int> oldSt = st;
         auto curr = mp[notes[i]];
-        // do intersections
+        // do intersections between old set and curr set
         for (auto p : st) {
             if (curr.find(p) == curr.end()) {
-                newSt.erase(p);
+                oldSt.erase(p);
             }
         }
         for (auto p : curr) {
             if (st.find(p) == st.end()) {
-                newSt.erase(p);
+                oldSt.erase(p);
             }
         }
         // if intersection empty, we have no common instruments
-        if (newSt.size() == 0) {
+        // need to switch
+        if (oldSt.size() == 0) {
             ct++;
             st = curr;
         } else {
-            st = newSt;
+            st = oldSt;
         }
     }
     putl(ct);
