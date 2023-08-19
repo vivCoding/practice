@@ -1,3 +1,8 @@
+"""
+Problem: https://purdue.kattis.com/courses/CS390-CP2/2023-spring/assignments/bshgus/problems/simon
+
+"""
+
 t = input()
 
 for _ in range(int(t)):
