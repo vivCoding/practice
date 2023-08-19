@@ -80,10 +80,12 @@ public:
         }
         cnt--;
     }
+    
     // Checks if x and y belong to same component. O(log(n))
     bool connected(int x, int y) {
         return find(x) == find(y);
     }
+    
     // Return the number of components. Constant
     int count() {
         return cnt;
